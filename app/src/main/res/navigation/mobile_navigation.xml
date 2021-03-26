@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_workout">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.killins.fitnesstracker.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_workout"
+        android:name="com.killins.fitnesstracker.ui.workout.WorkoutFragment"
+        android:label="@string/title_workout"
+        tools:layout="@layout/fragment_workout" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.killins.fitnesstracker.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_goals"
+        android:name="com.killins.fitnesstracker.ui.goals.GoalsFragment"
+        android:label="@string/title_goals"
+        tools:layout="@layout/fragment_goals" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.killins.fitnesstracker.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_stats"
+        android:name="com.killins.fitnesstracker.ui.stats.StatsFragment"
+        android:label="@string/title_stats"
+        tools:layout="@layout/fragment_stats" />
 </navigation>
