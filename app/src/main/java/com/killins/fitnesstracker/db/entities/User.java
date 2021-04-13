@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 //Each @Entity class represents a SQLite table. Annotate your class declaration to indicate that it's an entity.
 // You can specify the name of the table if you want it to be different from the name of the class.
 //When a class is marked as an Entity, all of its fields are persisted. If you would like to exclude some of its fields, you can mark them with Ignore.
@@ -15,6 +17,7 @@ public class User {
     //Every field that's stored in the database needs to be either public or have a "getter" method.
     //Specify the name of the column in the table if you want it to be different from the name of the member variable.
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "userId")
     public String username;
     private String name;
@@ -26,7 +29,7 @@ public class User {
     public String getUsername() {
         return username;
     }
-    public void setUsername(String username) {
+    public void setUsername(@NotNull String username) {
         this.username = username;
     }
 
@@ -54,7 +57,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String name, String email, String password) {
+    public User(@NotNull String username, String name, String email, String password) {
         this.username = username;
         this.name = name;
         this.email = email;
