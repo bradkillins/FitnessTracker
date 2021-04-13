@@ -45,6 +45,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, DATABASE_NAME)
+                            .allowMainThreadQueries()
                             .build();
                     //If we want to prepopulate the database we can insert .createFromAsset() or .createFromFile() here
                 }

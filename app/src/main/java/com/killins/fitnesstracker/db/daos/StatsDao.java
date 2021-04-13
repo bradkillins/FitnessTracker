@@ -21,6 +21,6 @@ public interface StatsDao {
     @Update
     void update(Stats stats);
 
-    @Query("SELECT * FROM stats WHERE userStatCreatorId = userStatCreatorId")
-    LiveData<Stats> loadUserById(String userStatCreatorId);
+    @Query("SELECT * FROM stats WHERE userStatCreatorId = :userStatCreatorId")
+    LiveData<Stats> loadUserStats(String userStatCreatorId);
 }

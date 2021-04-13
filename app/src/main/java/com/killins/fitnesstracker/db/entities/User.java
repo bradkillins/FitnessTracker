@@ -17,6 +17,7 @@ public class User {
     //Every field that's stored in the database needs to be either public or have a "getter" method.
     //Specify the name of the column in the table if you want it to be different from the name of the member variable.
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "userId")
     private String username;
     private String name;
@@ -28,7 +29,7 @@ public class User {
     public String getUsername() {
         return username;
     }
-    public void setUsername(String username) {
+    public void setUsername(@NotNull String username) {
         this.username = username;
     }
 
@@ -56,7 +57,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String name, String email, String password) {
+    public User(@NotNull String username, String name, String email, String password) {
         this.username = username;
         this.name = name;
         this.email = email;
