@@ -59,9 +59,17 @@ public class RunTracker extends AppCompatActivity
     private LocalBroadcastManager localBroadcastManager;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run_tracker);
+
+        //restore previously saved state
+        if (savedInstanceState != null) {
+            lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
+        }
+
+        localBroadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
 
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -83,6 +91,7 @@ public class RunTracker extends AppCompatActivity
             Intent serviceIntent = new Intent(this, GetLocationForegroundService.class);
             stopService(serviceIntent);
         });
+
     }
 
     @Override
