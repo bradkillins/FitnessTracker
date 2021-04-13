@@ -21,6 +21,6 @@ public interface WorkoutDao {
     @Update
     void update(Workout workout);
 
-    @Query("SELECT * FROM workouts WHERE userWorkoutCreatorId = userWorkoutCreatorId")
-    LiveData<Workout> loadUserById(String userWorkoutCreatorId);
+    @Query("SELECT * FROM workouts WHERE userWorkoutCreatorId = :userWorkoutCreatorId")
+    LiveData<Workout> loadUserWorkouts(String userWorkoutCreatorId);
 }

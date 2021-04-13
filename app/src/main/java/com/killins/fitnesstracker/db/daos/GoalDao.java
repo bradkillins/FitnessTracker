@@ -21,6 +21,6 @@ public interface GoalDao {
     @Update
     void update(Goal goal);
 
-    @Query("SELECT * FROM goals WHERE userGoalCreatorId = userGoalCreatorId")
-    LiveData<Goal> loadUserById(String userGoalCreatorId);
+    @Query("SELECT * FROM goals WHERE userGoalCreatorId = :userGoalCreatorId")
+    LiveData<Goal> loadUserGoals(String userGoalCreatorId);
 }

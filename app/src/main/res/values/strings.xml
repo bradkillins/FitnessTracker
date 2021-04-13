@@ -6,4 +6,27 @@
     <string name="title_workout">Workout</string>
     <string name="title_stats">Stats</string>
     <string name="title_goals">Goals</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="user_name">User Name</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="usernameHint">Username</string>
+    <string name="nameHint">Name</string>
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="re_enter_passwordHint">Re-enter Password</string>
+    <string name="btnText_create_account">Create Account</string>
+    <string name="Login_Link">Already a member? Login</string>
+    <string name="signup_link">Create A New Account</string>
+    <string name="btnText_login">Login</string>
 </resources>

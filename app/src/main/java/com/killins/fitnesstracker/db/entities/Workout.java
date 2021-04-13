@@ -2,10 +2,11 @@ package com.killins.fitnesstracker.db.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "workouts", foreignKeys= {@ForeignKey(entity = Workout.class, parentColumns = "userId", childColumns = "userWorkoutCreatorId", onDelete = ForeignKey.CASCADE)}, indices = {@Index(value = "username")})
+@Entity(tableName = "workouts", foreignKeys= {@ForeignKey(entity = User.class, parentColumns = "userId", childColumns = "userWorkoutCreatorId", onDelete = ForeignKey.CASCADE)}, indices = {@Index(value = "userWorkoutCreatorId")})
 public class Workout {
     @PrimaryKey (autoGenerate = true)
     public long workoutId;
@@ -41,10 +42,14 @@ public class Workout {
         this.workoutType = workoutType;
     }
 
+    @Ignore
     public Workout(long workoutId, long userWorkoutCreatorId, String workoutName, String workoutType) {
         this.workoutId = workoutId;
         this.userWorkoutCreatorId = userWorkoutCreatorId;
         this.workoutName = workoutName;
         this.workoutType = workoutType;
+    }
+
+    public Workout() {
     }
 }
