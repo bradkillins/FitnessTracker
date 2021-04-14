@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         loginButton.setEnabled(true);
         getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).edit().putBoolean("signIn", false).apply();
+        getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).edit().putString("currentUser", usernameText.getText().toString()).apply();
         Toast.makeText(getBaseContext(), "Successfully Logged In!", Toast.LENGTH_LONG).show();
         finish();
     }

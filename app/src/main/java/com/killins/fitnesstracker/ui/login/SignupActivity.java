@@ -77,6 +77,8 @@ public class SignupActivity extends AppCompatActivity {
 
     public void onSignupSuccess() {
         signupButton.setEnabled(true);
+        getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).edit().putBoolean("signIn", false).apply();
+        getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).edit().putString("currentUser", userNameText.getText().toString()).apply();
         setResult(RESULT_OK, null);
         finish();
         overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
