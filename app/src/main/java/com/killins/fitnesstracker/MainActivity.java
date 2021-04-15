@@ -3,6 +3,8 @@ package com.killins.fitnesstracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +49,41 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    /**
+     * Inflates the menu, and adds items to the action bar if it is present.
+     *
+     * @param menu Menu to inflate.
+     * @return Returns true if the menu inflated.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+    /**
+     * Handles app bar item clicks.
+     *
+     * @param item Item clicked.
+     * @return True if one of the defined items was clicked.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).edit().putBoolean("signIn", true).apply();
+                getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).edit().remove("currentUser").apply();
+                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+                return true;
+            default:
+                // Do nothing
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
