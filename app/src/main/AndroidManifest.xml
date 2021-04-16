@@ -29,6 +29,9 @@
             android:name=".ui.login.SignupActivity"
             android:label="@string/title_activity_signup" />
         <activity
+            android:name=".ui.goals.NewGoalActivity"
+            android:label="@string/NewGoalActivity"/>
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>

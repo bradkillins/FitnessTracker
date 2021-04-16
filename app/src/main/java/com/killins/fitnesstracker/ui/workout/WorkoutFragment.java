@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.killins.fitnesstracker.R;
-import com.killins.fitnesstracker.RunTracker;
 import com.killins.fitnesstracker.db.entities.Goal;
 import com.killins.fitnesstracker.ui.goals.GoalsViewModel;
 
@@ -33,10 +32,8 @@ public class WorkoutFragment extends Fragment {
         workoutViewModel =
                 new ViewModelProvider(this).get(WorkoutViewModel.class);
         View root = inflater.inflate(R.layout.fragment_workout, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        workoutViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        root.findViewById(R.id.startRunTest).setOnClickListener(v -> {
+        root.findViewById(R.id.start_run_button).setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), RunTracker.class);
             startActivity(intent);
         });

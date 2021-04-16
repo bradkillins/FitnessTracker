@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -65,6 +66,8 @@ public class RunTracker extends AppCompatActivity
     private boolean running = false;
     private int runDistance = 0;
 
+    private WorkoutViewModel workoutViewModel;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,6 +96,11 @@ public class RunTracker extends AppCompatActivity
         mapFragment.getMapAsync(this);
         Button startButton = findViewById(R.id.startButton);
         if(running) startButton.setEnabled(false);
+
+
+        workoutViewModel = ViewModelProviders.of(this).get(WorkoutViewModel.class);
+
+
         //Add onclick listener to start button
         startButton.setOnClickListener(v -> {
             v.setEnabled(false);
@@ -306,7 +314,7 @@ public class RunTracker extends AppCompatActivity
     private void showRunStopDialog(int runTimeMin, int runTimeSec, int runDistance){
         // ******* INSERT WORKOUT DATA INTO DB HERE ********* //
 
-
+        workoutViewModel.insertRunWorkout((int)(System.currentTimeMillis() - timerStartTime), runDistance);
 
         //then show the dialog
         RunStopDialog dialog = new RunStopDialog(runTimeMin, runTimeSec, runDistance);
