@@ -10,22 +10,19 @@ import com.killins.fitnesstracker.db.entities.Goal;
 
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.killins.fitnesstracker.db.AppDatabase.databaseWriteExecutor;
 
 public class GoalRepository {
-    private final GoalDao goalDao;
+    private GoalDao goalDao;
     private LiveData<List<Goal>> goals;
     private static volatile GoalRepository instance;
 
-    GoalRepository(GoalDao goalDao) {
-        this.goalDao = goalDao;
-    }
-
-    public static GoalRepository getInstance(GoalDao goalDao){
-        if (instance == null) {
-            instance = new GoalRepository(goalDao);
-        }
-        return instance;
+    public GoalRepository(Application application){
+        AppDatabase db = AppDatabase.getDatabase(application);
+        goalDao = db.goalDao();
+        String currentUser = application.getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", "");
+        goals = goalDao.loadUserGoals(currentUser);
     }
 
     public void insert(Goal goal) {

@@ -1,8 +1,10 @@
 package com.killins.fitnesstracker.ui.goals;
 
+import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -19,33 +21,18 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class GoalsViewModel extends ViewModel {
+public class GoalsViewModel extends AndroidViewModel {
     private final GoalRepository goalRepository;
-    private final LiveData<List<Goal>> goals;
+    private LiveData<List<Goal>> goals;
 
-    public GoalsViewModel(Context context) {
-        goalRepository = GoalRepository.getInstance(AppDatabase.getDatabase(context).goalDao());
-        goals = goalRepository.loadUserGoals(context.getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", ""));
+    public GoalsViewModel(@NonNull Application application){
+        super(application);
+        goalRepository = new GoalRepository(application);
+        goals = goalRepository.loadUserGoals(application.getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", ""));
     }
     public void insert(Goal goal){
         goalRepository.insert(goal);
     }
-    public
-    LiveData<List<Goal>> loadUserGoals(String currentUserId){return goals;}
 
-    public static class Factory implements ViewModelProvider.Factory {
-        private final Context ctxt;
-
-        Factory(Context ctxt) {
-            this.ctxt=ctxt.getApplicationContext();
-        }
-
-        @NonNull
-        @Override
-        @SuppressWarnings("unchecked")
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-
-            return((T)new GoalsViewModel(ctxt));
-        }
-    }
+    public LiveData<List<Goal>> loadUserGoals(String currentUserId){return goals;}
 }

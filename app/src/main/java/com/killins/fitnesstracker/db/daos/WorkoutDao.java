@@ -10,6 +10,8 @@ import androidx.room.Update;
 
 import com.killins.fitnesstracker.db.entities.Workout;
 
+import java.util.List;
+
 @Dao
 public interface WorkoutDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -22,5 +24,5 @@ public interface WorkoutDao {
     void update(Workout workout);
 
     @Query("SELECT * FROM workouts WHERE userWorkoutCreatorId = :userWorkoutCreatorId")
-    LiveData<Workout> loadUserWorkouts(String userWorkoutCreatorId);
+    LiveData<List<Workout>> loadUserWorkouts(String userWorkoutCreatorId);
 }

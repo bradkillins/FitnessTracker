@@ -45,4 +45,7 @@
     <string name="add_goal">Add Goal</string>
     <string name="empty_not_saved">Goal not saved because one or more fields was empty.</string>
     <string name="addValue">Try adding your first goal</string>
+    <string name="runtime_label">Total Runtime:</string>
+    <string name="weightlifting_time_label">Total Weightlifting Time:</string>
+    <string name="bodyweight_time_label">Total BodyWeight Excercise Time:</string>
 </resources>

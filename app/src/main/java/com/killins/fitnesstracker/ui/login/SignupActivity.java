@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +31,7 @@ public class SignupActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        loginViewModel = new ViewModelProvider(this, new LoginViewModel.Factory(getApplicationContext())).get(LoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         userNameText = findViewById(R.id.input_username);
         nameText = findViewById(R.id.input_name);
         emailText = findViewById(R.id.input_email);

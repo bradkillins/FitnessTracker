@@ -7,7 +7,7 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "goals", foreignKeys= {@ForeignKey(entity = User.class, parentColumns = "userId", childColumns = "userGoalCreatorId", onDelete = ForeignKey.CASCADE)}, indices = {@Index(value = "userGoalCreatorId")})
+@Entity(tableName = "goals")
 public class Goal {
     @PrimaryKey(autoGenerate = true)
     public long goalId;

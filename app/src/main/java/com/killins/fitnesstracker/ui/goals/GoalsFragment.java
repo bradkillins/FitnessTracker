@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,7 @@ public class GoalsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_goals, container, false);
         currentUserId = requireActivity().getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", "");
 
@@ -43,22 +45,29 @@ public class GoalsFragment extends Fragment {
         final GoalListAdapter adapter = new GoalListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        goalsViewModel = new ViewModelProvider(this, new GoalsViewModel.Factory(requireActivity().getApplicationContext())).get(GoalsViewModel.class);
-
-        goalsViewModel.loadUserGoals(currentUserId).observe(getViewLifecycleOwner(), goals -> {
-            // Update the cached copy of the goals in the adapter.
-            adapter.setGoals(goals);
-        });
-
-        // Floating action button setup
-        FloatingActionButton fab = requireView().findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), NewGoalActivity.class);
-            startActivityForResult(intent, NEW_GOAL_ACTIVITY_REQUEST_CODE);
+        goalsViewModel = ViewModelProviders.of(this).get(GoalsViewModel.class);
+        // Update the cached copy of the goals in the adapter.
+        goalsViewModel.loadUserGoals(currentUserId).observe(getViewLifecycleOwner(), new Observer<List<Goal>>() {
+            @Override
+            public void onChanged(@Nullable List<Goal> goals) {
+                adapter.setGoals(goals);
+            }
         });
         return root;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Floating action button setup
+        FloatingActionButton fab = requireView().findViewById(R.id.fab);
+        fab.setOnClickListener(currentView -> {
+            Intent intent = new Intent(getActivity(), NewGoalActivity.class);
+            startActivityForResult(intent, NEW_GOAL_ACTIVITY_REQUEST_CODE);
+        });
+    }
+
+
 
     /**
      * When the user enters a new word in the NewWordActivity,
