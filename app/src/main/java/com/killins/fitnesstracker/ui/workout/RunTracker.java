@@ -35,7 +35,7 @@ import com.killins.fitnesstracker.R;
 import com.killins.fitnesstracker.services.GetLocationForegroundService;
 
 public class RunTracker extends AppCompatActivity
-    implements OnMapReadyCallback {
+    implements OnMapReadyCallback, RunStopDialog.RunStopDialogListener {
 
     private static final String TAG = "RunTrackerActivity";
     private GoogleMap map;
@@ -63,6 +63,7 @@ public class RunTracker extends AppCompatActivity
     private LocalBroadcastManager localBroadcastManager;
     private Long timerStartTime;
     private boolean running = false;
+    private int runDistance = 0;
 
 
     @Override
@@ -107,6 +108,13 @@ public class RunTracker extends AppCompatActivity
             timerHandler.removeCallbacks(tickTimer);
             Intent serviceIntent = new Intent(this, GetLocationForegroundService.class);
             stopService(serviceIntent);
+
+            long currentTime = System.currentTimeMillis();
+            long elapsedTime = (currentTime - timerStartTime) / 1000;
+            int min = (int)elapsedTime/60;
+            int sec = (int)elapsedTime % 60;
+
+            showRunStopDialog(min, sec, runDistance);
         });
 
     }
@@ -236,13 +244,12 @@ public class RunTracker extends AppCompatActivity
         }
         map.addPolyline(pathOptions);
 
-        int distance = 0;
 
         if(locations.length > 0)
-               distance = (int) locations[locations.length-1];
+               runDistance = (int) locations[locations.length-1];
 
         TextView distanceView = findViewById(R.id.distance_textview);
-        distanceView.setText(getString(R.string.distance_placeholder,distance));
+        distanceView.setText(getString(R.string.distance_placeholder, runDistance));
     }
 
     @Override
@@ -295,4 +302,19 @@ public class RunTracker extends AppCompatActivity
             Log.d(TAG, "onReceive: " + msg);
         }
     };
+
+    private void showRunStopDialog(int runTimeMin, int runTimeSec, int runDistance){
+        // ******* INSERT WORKOUT DATA INTO DB HERE ********* //
+
+
+
+        //then show the dialog
+        RunStopDialog dialog = new RunStopDialog(runTimeMin, runTimeSec, runDistance);
+        dialog.show(getSupportFragmentManager(), "runStop_dialog");
+    }
+
+    @Override
+    public void onRunStopDialogPositiveClick() {
+        finish();
+    }
 }
