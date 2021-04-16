@@ -6,12 +6,13 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "stats", foreignKeys= {@ForeignKey(entity = User.class, parentColumns = "userId", childColumns = "userStatCreatorId", onDelete = ForeignKey.CASCADE)}, indices = {@Index(value = "userStatCreatorId")})
+@Entity(tableName = "stats")
 public class Stats {
     @PrimaryKey(autoGenerate = true)
     public long statId;
-    public long userStatCreatorId;
+    public String userStatCreatorId;
     public String StatName;
+    public long runTime;
 
     public long getStatId() {
         return statId;
@@ -20,10 +21,10 @@ public class Stats {
         this.statId = statId;
     }
 
-    public long getUserStatCreatorId() {
+    public String getUserStatCreatorId() {
         return userStatCreatorId;
     }
-    public void setUserStatCreatorId(long userStatCreatorId) {
+    public void setUserStatCreatorId(String userStatCreatorId) {
         this.userStatCreatorId = userStatCreatorId;
     }
 
@@ -35,10 +36,9 @@ public class Stats {
     }
 
     @Ignore
-    public Stats(long statId, long userStatCreatorId, String statName) {
-        this.statId = statId;
+    public Stats(String userStatCreatorId, String statName) {
         this.userStatCreatorId = userStatCreatorId;
-        StatName = statName;
+        this.StatName = statName;
     }
     public Stats(){
 

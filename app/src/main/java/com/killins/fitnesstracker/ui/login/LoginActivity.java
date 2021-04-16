@@ -3,6 +3,7 @@ package com.killins.fitnesstracker.ui.login;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.killins.fitnesstracker.MainActivity;
 import com.killins.fitnesstracker.R;
 
 
@@ -28,9 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginViewModel = new ViewModelProvider(this, new LoginViewModel.Factory(getApplicationContext())).get(LoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         usernameText = findViewById(R.id.input_username);
-        passwordText = findViewById(R.id.input_password);
+        passwordText = findViewById(R.id.goal_value);
         loginButton = findViewById(R.id.btn_login);
         TextView signupLink = findViewById(R.id.link_signup);
 

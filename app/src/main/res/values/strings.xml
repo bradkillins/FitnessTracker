@@ -39,5 +39,13 @@
     <string name="distance_placeholder">Distance: %1$d m</string>
     <string name="time_placeholder">Time: %1$s</string>
     <string name="logout">Logout</string>
-    <string name="run_stop_dialog_message">You ran %1$d m in %2$d min and %3$d sec!</string>
+    <string name="no_goal">No Goal</string>
+    <string name="goal_value_hint">Value of your goal</string>
+    <string name="goalName">Name of your goal</string>
+    <string name="add_goal">Add Goal</string>
+    <string name="empty_not_saved">Goal not saved because one or more fields was empty.</string>
+    <string name="addValue">Try adding your first goal</string>
+    <string name="runtime_label">Total Runtime:</string>
+    <string name="weightlifting_time_label">Total Weightlifting Time:</string>
+    <string name="bodyweight_time_label">Total BodyWeight Excercise Time:</string>
 </resources>

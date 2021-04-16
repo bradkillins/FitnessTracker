@@ -1,9 +1,12 @@
 package com.killins.fitnesstracker.db;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.killins.fitnesstracker.db.daos.GoalDao;
 import com.killins.fitnesstracker.db.daos.StatsDao;
@@ -16,6 +19,9 @@ import com.killins.fitnesstracker.db.entities.Workout;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static android.content.Context.MODE_PRIVATE;
+
 
 @Database(entities = {User.class, Workout.class, Goal.class, Stats.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
@@ -53,4 +59,27 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+//    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+//        @Override
+//        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+//            super.onCreate(db);
+//        }
+//    };
+//
+//
+//    private static class PopulateGoals{
+//        private GoalDao goalDao;
+//
+//        private PopulateGoals(AppDatabase db){
+//            goalDao = db.goalDao();
+//        }
+//        String goalName = "No goals:";
+//        String goalValue = "Try adding your first goal";
+//        String currentUserId = .getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", "");
+//        Goal initialGoal = new Goal(currentUserId, goalName, goalValue);
+//        // Here I'm getting a foreign key constraint error.  I think because it is trying create this entity and load the database before a user has been created.
+//        goalDao.insert(initialGoal);
+//        //databaseWriteExecutor.execute(() -> mDao.insert(initialGoal));
+//    }
 }

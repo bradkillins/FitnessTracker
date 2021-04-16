@@ -10,11 +10,11 @@ import androidx.room.PrimaryKey;
 public class Workout {
     @PrimaryKey (autoGenerate = true)
     public long workoutId;
-    public long userWorkoutCreatorId;
+    public String userWorkoutCreatorId;
     public String workoutName;
     public String workoutType;
-    public int distance;
-
+    public long runTime;
+    public long distance;
 
     public long getWorkoutId() {
         return workoutId;
@@ -23,10 +23,10 @@ public class Workout {
         this.workoutId = workoutId;
     }
 
-    public long getUserWorkoutCreatorId() {
+    public String getUserWorkoutCreatorId() {
         return userWorkoutCreatorId;
     }
-    public void setUserWorkoutCreatorId(long userWorkoutCreatorId) {
+    public void setUserWorkoutCreatorId(String userWorkoutCreatorId) {
         this.userWorkoutCreatorId = userWorkoutCreatorId;
     }
 
@@ -45,7 +45,7 @@ public class Workout {
     }
 
     @Ignore
-    public Workout(long workoutId, long userWorkoutCreatorId, String workoutName, String workoutType) {
+    public Workout(String userWorkoutCreatorId, String workoutName, String workoutType) {
         this.workoutId = workoutId;
         this.userWorkoutCreatorId = userWorkoutCreatorId;
         this.workoutName = workoutName;

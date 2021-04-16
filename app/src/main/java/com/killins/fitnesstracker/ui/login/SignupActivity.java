@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,11 +31,11 @@ public class SignupActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        loginViewModel = new ViewModelProvider(this, new LoginViewModel.Factory(getApplicationContext())).get(LoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         userNameText = findViewById(R.id.input_username);
         nameText = findViewById(R.id.input_name);
         emailText = findViewById(R.id.input_email);
-        passwordText = findViewById(R.id.input_password);
+        passwordText = findViewById(R.id.goal_value);
         reEnterPasswordText = findViewById(R.id.input_reEnterPassword);
         signupButton = findViewById(R.id.btn_signup);
         loginLink = findViewById(R.id.link_login);
@@ -65,6 +66,8 @@ public class SignupActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
 
         loginViewModel.createUser(username, name, email, password);
+        loginViewModel.populateGoals(username);
+
         onSignupSuccess();
         //onSignupFailed();
     }

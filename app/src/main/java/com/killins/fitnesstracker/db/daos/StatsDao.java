@@ -10,6 +10,8 @@ import androidx.room.Update;
 
 import com.killins.fitnesstracker.db.entities.Stats;
 
+import java.util.List;
+
 @Dao
 public interface StatsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -22,5 +24,5 @@ public interface StatsDao {
     void update(Stats stats);
 
     @Query("SELECT * FROM stats WHERE userStatCreatorId = :userStatCreatorId")
-    LiveData<Stats> loadUserStats(String userStatCreatorId);
+    LiveData<List<Stats>> loadUserStats(String userStatCreatorId);
 }
