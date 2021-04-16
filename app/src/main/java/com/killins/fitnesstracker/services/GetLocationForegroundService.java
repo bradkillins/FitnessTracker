@@ -18,9 +18,8 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.killins.fitnesstracker.MainActivity;
 import com.killins.fitnesstracker.R;
-import com.killins.fitnesstracker.RunTracker;
+import com.killins.fitnesstracker.ui.workout.RunTracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,6 @@ public class GetLocationForegroundService extends Service {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationRequest locationRequest;
     private List<Location> locations = new ArrayList<>();
-
     private final String TAG = "getLocationService";
 
     private final int REFRESH_LOCATION_PERIOD = 1000 * 15; // when screen off, location services can take up to 2x longer between periods
@@ -46,16 +44,6 @@ public class GetLocationForegroundService extends Service {
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        Intent notificationIntent = new Intent(this, RunTracker.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, notificationIntent, 0);
-        notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Run Tracker")
-                .setContentText("Keep up the Awesome work!")
-                .setSmallIcon(R.drawable.ic_baseline_directions_run_24)
-                .setContentIntent(pendingIntent)
-                .build();
-
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(REFRESH_LOCATION_PERIOD)
@@ -65,7 +53,7 @@ public class GetLocationForegroundService extends Service {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
         } catch (SecurityException e){
             Log.e(TAG, "onCreate: Lost location permissions", e);
-        };
+        }
 
     }
 
@@ -86,6 +74,20 @@ public class GetLocationForegroundService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        long timerStartTime = intent.getLongExtra("com.killins.fitnessTracker.TIMERSTART", 0);
+        Intent notificationIntent = new Intent(this, RunTracker.class);
+        notificationIntent.putExtra("com.killins.fitnessTracker.TIMERSTART", timerStartTime);
+        notificationIntent.putExtra("com.killins.fitnessTracker.RUNNING", true);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("Run Tracker")
+                .setContentText("Keep up the Awesome work!")
+                .setSmallIcon(R.drawable.ic_baseline_directions_run_24)
+                .setContentIntent(pendingIntent)
+                .build();
+
         startForeground(1, notification);
         return START_STICKY;
     }

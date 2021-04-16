@@ -2,6 +2,8 @@ package com.killins.fitnesstracker.db.repositories;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import com.killins.fitnesstracker.db.AppDatabase;
 import com.killins.fitnesstracker.db.daos.WorkoutDao;
 import com.killins.fitnesstracker.db.entities.Workout;
@@ -26,4 +28,6 @@ public class WorkoutRepository {
     public void update(Workout workout) {
         AppDatabase.databaseWriteExecutor.execute(()-> mWorkoutDao.update(workout));
     }
+
+//    public LiveData<Workout> loadUserWorkouts()
 }

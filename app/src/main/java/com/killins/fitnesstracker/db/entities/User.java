@@ -20,6 +20,7 @@ public class User {
     @NonNull
     @ColumnInfo(name = "userId")
     private String username;
+
     private String name;
     private String email;
     private String password;

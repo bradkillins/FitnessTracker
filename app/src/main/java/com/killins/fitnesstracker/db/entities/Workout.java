@@ -13,6 +13,8 @@ public class Workout {
     public long userWorkoutCreatorId;
     public String workoutName;
     public String workoutType;
+    public int distance;
+
 
     public long getWorkoutId() {
         return workoutId;

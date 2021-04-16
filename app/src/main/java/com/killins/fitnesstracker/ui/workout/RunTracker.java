@@ -1,4 +1,4 @@
-package com.killins.fitnesstracker;
+package com.killins.fitnesstracker.ui.workout;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,8 +7,10 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,8 +30,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.killins.fitnesstracker.R;
 import com.killins.fitnesstracker.services.GetLocationForegroundService;
 
 public class RunTracker extends AppCompatActivity
@@ -55,18 +57,27 @@ public class RunTracker extends AppCompatActivity
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
+    private static final String KEY_RUNTIMER = "run_timer";
+    private static final String KEY_RUNNING = "is_running?";
 
     private LocalBroadcastManager localBroadcastManager;
+    private Long timerStartTime;
+    private boolean running = false;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run_tracker);
-
+        running = getIntent().getBooleanExtra("com.killins.fitnessTracker.RUNNING", false);
+        long intentTimerStart = getIntent().getLongExtra("com.killins.fitnessTracker.TIMERSTART",0);
+        if(intentTimerStart > 0) timerStartTime = intentTimerStart;
         //restore previously saved state
         if (savedInstanceState != null) {
             lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
+            timerStartTime = savedInstanceState.getLong(KEY_RUNTIMER);
+            running = savedInstanceState.getBoolean(KEY_RUNNING);
         }
 
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
@@ -79,16 +90,21 @@ public class RunTracker extends AppCompatActivity
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
-
+        Button startButton = findViewById(R.id.startButton);
+        if(running) startButton.setEnabled(false);
         //Add onclick listener to start button
-        findViewById(R.id.startButton).setOnClickListener(v -> {
-
+        startButton.setOnClickListener(v -> {
+            v.setEnabled(false);
+            running = true;
+            startTimer();
             Intent serviceIntent = new Intent(this, GetLocationForegroundService.class);
+            serviceIntent.putExtra("com.killins.fitnessTracker.TIMERSTART", timerStartTime);
             startService(serviceIntent);
         });
 
         //Add onclick listener to stop button
         findViewById(R.id.stopButton).setOnClickListener(v -> {
+            timerHandler.removeCallbacks(tickTimer);
             Intent serviceIntent = new Intent(this, GetLocationForegroundService.class);
             stopService(serviceIntent);
         });
@@ -101,6 +117,8 @@ public class RunTracker extends AppCompatActivity
         if (map != null) {
             outState.putParcelable(KEY_CAMERA_POSITION, map.getCameraPosition());
             outState.putParcelable(KEY_LOCATION, lastKnownLocation);
+            outState.putLong(KEY_RUNTIMER, timerStartTime);
+            outState.putBoolean(KEY_RUNNING, running);
         }
     }
 
@@ -202,7 +220,7 @@ public class RunTracker extends AppCompatActivity
         }
     }
 
-    private void addPathAndMarkers(double[] locations) {
+    private void updateAfterBroadcastReceived(double[] locations) {
         map.clear();
 
         PolylineOptions pathOptions = new PolylineOptions();
@@ -217,27 +235,59 @@ public class RunTracker extends AppCompatActivity
             pathOptions.add(latLng);
         }
         map.addPolyline(pathOptions);
+
+        int distance = 0;
+
+        if(locations.length > 0)
+               distance = (int) locations[locations.length-1];
+
+        TextView distanceView = findViewById(R.id.distance_textview);
+        distanceView.setText(getString(R.string.distance_placeholder,distance));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         IntentFilter filter = new IntentFilter("com.runTracker.RUN_DONE");
         localBroadcastManager.registerReceiver(receiver, filter);
+        //resume timer if it was already running
+        if(timerStartTime != null) timerHandler.post(tickTimer);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         localBroadcastManager.unregisterReceiver(receiver);
+        timerHandler.removeCallbacks(tickTimer);
     }
+
+    private void startTimer(){
+        timerStartTime = System.currentTimeMillis();
+        timerHandler.post(tickTimer);
+    }
+
+    Handler timerHandler = new Handler();
+
+    private final Runnable tickTimer = new Runnable() {
+        @Override
+        public void run() {
+            long currentTime = System.currentTimeMillis();
+            long elapsedTime = (currentTime - timerStartTime) / 1000;
+            int min = (int)elapsedTime/60;
+            int sec = (int)elapsedTime % 60;
+
+            String formattedElapsed = String.format("%1$02d : %2$02d", min, sec);
+            TextView timeTextView = findViewById(R.id.time_textview);
+            timeTextView.setText(getString(R.string.time_placeholder, formattedElapsed));
+            timerHandler.postDelayed(this, 1000);
+        }
+    };
 
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             double[] data = intent.getDoubleArrayExtra("com.runTracker.RUN_DATA");
-            addPathAndMarkers(data);
+            updateAfterBroadcastReceived(data);
             String msg = "received";
             if (data.length > 0)
                 msg = "length: " + data.length + ", 1st Lat: " + data[0] + ", 1st Lon: " + data[1] + ", Dist: " + data[data.length - 1];
