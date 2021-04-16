@@ -1,5 +1,6 @@
 package com.killins.fitnesstracker.db.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
@@ -10,8 +11,9 @@ import androidx.room.PrimaryKey;
 public class Goal {
     @PrimaryKey(autoGenerate = true)
     public long goalId;
-    public long userGoalCreatorId;
+    public String userGoalCreatorId;
     public String goalName;
+    public String goalValue;
 
     public long getGoalId() {
         return goalId;
@@ -20,11 +22,18 @@ public class Goal {
         this.goalId = goalId;
     }
 
-    public long getUserGoalCreatorId() {
+    public String getUserGoalCreatorId() {
         return userGoalCreatorId;
     }
-    public void setUserGoalCreatorId(long userGoalCreatorId) {
+    public void setUserGoalCreatorId(String userGoalCreatorId) {
         this.userGoalCreatorId = userGoalCreatorId;
+    }
+
+    public String getGoalValue() {
+        return goalValue;
+    }
+    public void setGoalValue(String goalValue) {
+        this.goalValue = goalValue;
     }
 
     public String getGoalName() {
@@ -35,11 +44,12 @@ public class Goal {
     }
 
     @Ignore
-    public Goal(long goalId, long userGoalCreatorId, String goalName) {
-        this.goalId = goalId;
+    public Goal(String userGoalCreatorId, @NonNull String goalName, @NonNull String goalValue) {
         this.userGoalCreatorId = userGoalCreatorId;
         this.goalName = goalName;
+        this.goalValue = goalValue;
     }
+
     public Goal(){
 
     }

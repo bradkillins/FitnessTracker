@@ -34,7 +34,7 @@ public class SignupActivity extends AppCompatActivity {
         userNameText = findViewById(R.id.input_username);
         nameText = findViewById(R.id.input_name);
         emailText = findViewById(R.id.input_email);
-        passwordText = findViewById(R.id.input_password);
+        passwordText = findViewById(R.id.goal_value);
         reEnterPasswordText = findViewById(R.id.input_reEnterPassword);
         signupButton = findViewById(R.id.btn_signup);
         loginLink = findViewById(R.id.link_login);
@@ -65,6 +65,7 @@ public class SignupActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
 
         loginViewModel.createUser(username, name, email, password);
+        //loginViewModel.PopulateGoals(username);
         onSignupSuccess();
         //onSignupFailed();
     }

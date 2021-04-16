@@ -10,6 +10,8 @@ import androidx.room.Update;
 
 import com.killins.fitnesstracker.db.entities.Goal;
 
+import java.util.List;
+
 @Dao
 public interface GoalDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -22,5 +24,5 @@ public interface GoalDao {
     void update(Goal goal);
 
     @Query("SELECT * FROM goals WHERE userGoalCreatorId = :userGoalCreatorId")
-    LiveData<Goal> loadUserGoals(String userGoalCreatorId);
+    LiveData<List<Goal>> loadUserGoals(String userGoalCreatorId);
 }

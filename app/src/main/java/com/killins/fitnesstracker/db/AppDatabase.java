@@ -17,6 +17,7 @@ import com.killins.fitnesstracker.db.entities.Workout;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
 @Database(entities = {User.class, Workout.class, Goal.class, Stats.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -53,4 +54,15 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+//    public void PopulateGoals (Context context){
+//        GoalDao mDao = goalDao();
+//        String goalName = "No goals:";
+//        String goalValue = "Try adding your first goal";
+//        String currentUserId = context.getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", "");
+//        Goal initialGoal = new Goal(currentUserId, goalName, goalValue);
+//        // Here I'm getting a foreign key constraint error.  I think because it is trying create this entity and load the database before a user has been created.
+//        mDao.insert(initialGoal);
+//        //databaseWriteExecutor.execute(() -> mDao.insert(initialGoal));
+//    }
 }

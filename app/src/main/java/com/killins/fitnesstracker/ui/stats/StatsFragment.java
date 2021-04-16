@@ -21,8 +21,8 @@ public class StatsFragment extends Fragment {
         statsViewModel =
                 new ViewModelProvider(this).get(StatsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_stats, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        statsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //final TextView textView = root.findViewById(R.id.text_notifications);
+        //statsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 }

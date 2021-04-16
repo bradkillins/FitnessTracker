@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this, new LoginViewModel.Factory(getApplicationContext())).get(LoginViewModel.class);
         usernameText = findViewById(R.id.input_username);
-        passwordText = findViewById(R.id.input_password);
+        passwordText = findViewById(R.id.goal_value);
         loginButton = findViewById(R.id.btn_login);
         TextView signupLink = findViewById(R.id.link_signup);
 
