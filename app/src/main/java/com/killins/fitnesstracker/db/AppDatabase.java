@@ -2,9 +2,11 @@ package com.killins.fitnesstracker.db;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.killins.fitnesstracker.db.daos.GoalDao;
 import com.killins.fitnesstracker.db.daos.StatsDao;
@@ -55,5 +57,11 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+//    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+//        @Override
+//        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+//            super.onCreate(db);
+//        }
+//    };
 }
 

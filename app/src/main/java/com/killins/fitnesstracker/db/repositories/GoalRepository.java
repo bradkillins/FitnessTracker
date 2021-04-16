@@ -34,4 +34,8 @@ public class GoalRepository {
     public void update(Goal goal) {
         AppDatabase.databaseWriteExecutor.execute(()-> goalDao.update(goal));
     }
+
+    public LiveData<List<Goal>> getUserGoals(){
+        return userGoals;
+    }
 }
