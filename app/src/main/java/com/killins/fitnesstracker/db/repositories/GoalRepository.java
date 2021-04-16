@@ -2,27 +2,36 @@ package com.killins.fitnesstracker.db.repositories;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import com.killins.fitnesstracker.db.AppDatabase;
 import com.killins.fitnesstracker.db.daos.GoalDao;
 import com.killins.fitnesstracker.db.entities.Goal;
 
-public class GoalRepository {
-    private final GoalDao mGoalDao;
+import java.util.List;
 
-    GoalRepository(Application application) {
+import static android.content.Context.MODE_PRIVATE;
+
+public class GoalRepository {
+    private final GoalDao goalDao;
+    private LiveData<List<Goal>> userGoals;
+
+    public GoalRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
-        mGoalDao = db.goalDao();
+        goalDao = db.goalDao();
+        String userId = application.getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", "");
+        userGoals = goalDao.loadUserGoals(userId);
     }
 
     public void insert(Goal goal) {
-        AppDatabase.databaseWriteExecutor.execute(() -> mGoalDao.insert(goal));
+        AppDatabase.databaseWriteExecutor.execute(() -> goalDao.insert(goal));
     }
 
     public void delete(Goal goal) {
-        AppDatabase.databaseWriteExecutor.execute(()-> mGoalDao.delete(goal));
+        AppDatabase.databaseWriteExecutor.execute(()-> goalDao.delete(goal));
     }
 
     public void update(Goal goal) {
-        AppDatabase.databaseWriteExecutor.execute(()->mGoalDao.update(goal));
+        AppDatabase.databaseWriteExecutor.execute(()-> goalDao.update(goal));
     }
 }
