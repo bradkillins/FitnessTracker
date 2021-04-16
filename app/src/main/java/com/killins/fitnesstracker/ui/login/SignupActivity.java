@@ -65,7 +65,8 @@ public class SignupActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
 
         loginViewModel.createUser(username, name, email, password);
-        //loginViewModel.PopulateGoals(username);
+        loginViewModel.populateGoals(username);
+
         onSignupSuccess();
         //onSignupFailed();
     }

@@ -30,6 +30,7 @@ public class GoalsViewModel extends ViewModel {
     public void insert(Goal goal){
         goalRepository.insert(goal);
     }
+    public
     LiveData<List<Goal>> loadUserGoals(String currentUserId){return goals;}
 
     public static class Factory implements ViewModelProvider.Factory {

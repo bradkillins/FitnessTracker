@@ -28,13 +28,12 @@ public class LoginViewModel extends ViewModel {
         userRepository.insert(username, name, email, password);
     }
 
-    public void PopulateGoals (String currentUser){
+    public void populateGoals (String currentUser){
         String goalName = "No goals:";
         String goalValue = "Try adding your first goal";
         String currentUserId = currentUser;
         Goal initialGoal = new Goal(currentUserId, goalName, goalValue);
-        //goalRepository.insert(initialGoal);
-        databaseWriteExecutor.execute(() -> goalRepository.insert(initialGoal));
+        goalRepository.populateGoals(initialGoal);
     }
 
     public boolean checkValidLogin(String username, String password)
