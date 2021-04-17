@@ -5,11 +5,11 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.killins.fitnesstracker.db.entities.Workout;
 import com.killins.fitnesstracker.db.repositories.WorkoutRepository;
+
+import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -20,10 +20,14 @@ public class WorkoutViewModel extends AndroidViewModel {
     private final String TYPE_BODY = "body_weightWorkout";
 
     private WorkoutRepository workoutRepository;
+    private LiveData<List<Workout>> workouts;
+
+    public LiveData<List<Workout>> loadUserWorkouts(String currentUserId){return workouts;}
 
     public WorkoutViewModel(@NonNull Application application) {
         super(application);
         workoutRepository = new WorkoutRepository(application);
+        workouts = workoutRepository.loadUserWorkouts(application.getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", ""));
     }
 
     public void insertRunWorkout(int duration, int distance){

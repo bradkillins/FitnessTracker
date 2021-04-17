@@ -70,14 +70,14 @@ public class GoalsFragment extends Fragment {
 
 
     /**
-     * When the user enters a new word in the NewWordActivity,
+     * When the user enters a new goal in the NewGoalActivity,
      * that activity returns the result to this activity.
-     * If the user entered a new word, save it in the database.
+     * If the user entered a new goal, save it in the database.
 
      * @param requestCode ID for the request
      * @param resultCode indicates success or failure
-     * @param data The Intent sent back from the NewWordActivity,
-     *             which includes the word that the user entered
+     * @param data The Intent sent back from the NewGoalActivity,
+     *             which includes the goal that the user entered
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
