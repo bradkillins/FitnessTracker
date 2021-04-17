@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/weightsWorkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/weights_workout_title"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewWeights"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/weightstime_label"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/weights_reps"
+            app:layout_constraintTop_toBottomOf="@+id/weights_sets" />
+
+        <TextView
+            android:id="@+id/textViewWeightTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/run_time"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/num_reps" />
+
+        <TextView
+            android:id="@+id/weights_sets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/weights_sets"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/weights_reps"
+            app:layout_constraintTop_toBottomOf="@+id/weights_reps" />
+
+        <TextView
+            android:id="@+id/num_sets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/num_sets"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textViewWeightTime"
+            app:layout_constraintTop_toTopOf="@+id/weights_sets" />
+
+        <TextView
+            android:id="@+id/weights_reps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/weights_reps"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/weightsWorkout"
+            app:layout_constraintTop_toTopOf="@+id/weightsWorkout" />
+
+        <TextView
+            android:id="@+id/num_reps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="32dp"
+            android:text="@string/num_reps"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/weights_reps"
+            app:layout_constraintTop_toTopOf="@+id/weights_reps" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -45,11 +45,7 @@
     <string name="add_goal">Add Goal</string>
     <string name="empty_not_saved">Goal not saved because one or more fields was empty.</string>
     <string name="addValue">Try adding your first goal</string>
-    <string name="runtime_label">Total Runtime:</string>
-    <string name="weightlifting_time_label">Total Weightlifting Time:</string>
-    <string name="bodyweight_time_label">Total BodyWeight Exercise Time:</string>
     <string name="title_activity_new_goal">Add a New Goal</string>
-    <string name="run_stop_dialog_message">You ran %1$dm in %2$d min and %3$d sec!</string>
     <string name="lbs">lbs</string>
     <string name="enter_weight">Enter Weight:</string>
     <string name="number_of_reps">Number of Reps:</string>
@@ -58,4 +54,22 @@
     <string name="time_left_in_break">Time left in Break</string>
     <string name="weights_activity_title">Weights Workout</string>
     <string name="body_weight_activity_title">Body-Weight Workout</string>
+    <string name="runtime_label">Workout Runtime:</string>
+    <string name="weightlifting_time_label">Time:</string>
+    <string name="bodyweight_time_label">Time:</string>
+    <string name="NewGoalActivity">Add a New Goal</string>
+    <string name="run_stop_dialog_message">You ran %1$d m in %2$d min and %3$d sec!</string>
+    <string name="run_time">Time</string>
+    <string name="run_workout_title">Run:</string>
+    <string name="distance_label">Distance:</string>
+    <string name="weights_workout_title">Weights:</string>
+    <string name="weightstime_label">Time:</string>
+    <string name="weights_sets">Sets:</string>
+    <string name="num_sets">num</string>
+    <string name="weights_reps">Reps:</string>
+    <string name="num_reps">numReps</string>
+    <string name="bodyweight_workout_title">Body Weight:</string>
+    <string name="bodyWeightTime">time</string>
+    <string name="bodyweight_num_reps">numreps</string>
+    <string name="bodyweight_reps">Reps</string>
 </resources>
