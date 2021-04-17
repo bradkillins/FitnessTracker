@@ -10,7 +10,7 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="user_name">User Name</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -19,7 +19,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_signup">Sign Up</string>
     <string name="usernameHint">Username</string>
     <string name="nameHint">Name</string>
     <string name="emailHint">Email</string>
@@ -48,6 +48,14 @@
     <string name="runtime_label">Total Runtime:</string>
     <string name="weightlifting_time_label">Total Weightlifting Time:</string>
     <string name="bodyweight_time_label">Total BodyWeight Exercise Time:</string>
-    <string name="NewGoalActivity">Add a New Goal</string>
-    <string name="run_stop_dialog_message">You ran %1$d m in %2$d min and %3$d sec!</string>
+    <string name="title_activity_new_goal">Add a New Goal</string>
+    <string name="run_stop_dialog_message">You ran %1$dm in %2$d min and %3$d sec!</string>
+    <string name="lbs">lbs</string>
+    <string name="enter_weight">Enter Weight:</string>
+    <string name="number_of_reps">Number of Reps:</string>
+    <string name="number_of_sets">Number of Sets:</string>
+    <string name="time_left_in_set">Time left in Set</string>
+    <string name="time_left_in_break">Time left in Break</string>
+    <string name="weights_activity_title">Weights Workout</string>
+    <string name="body_weight_activity_title">Body-Weight Workout</string>
 </resources>

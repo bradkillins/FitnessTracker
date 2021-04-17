@@ -15,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessTracker">
 
-        <!-- The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
@@ -30,7 +29,16 @@
             android:label="@string/title_activity_signup" />
         <activity
             android:name=".ui.goals.NewGoalActivity"
-            android:label="@string/NewGoalActivity"/>
+            android:label="@string/title_activity_new_goal"/>
+
+        <activity
+            android:name=".ui.workout.WeightsActivity"
+            android:label="@string/weights_activity_title"/>
+
+        <activity
+            android:name=".ui.workout.BodyWeightActivity"
+            android:label="@string/body_weight_activity_title"/>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

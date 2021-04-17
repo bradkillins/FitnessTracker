@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/setTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/number_of_sets"
+        android:textSize="20sp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/numberSetText"
+        app:layout_constraintEnd_toStartOf="@id/decreaseSetButton"
+        app:layout_constraintTop_toTopOf="@id/numberSetText" />
+
+
+    <ImageButton
+        android:id="@+id/increaseSetButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        app:layout_constraintStart_toEndOf="@id/numberSetText"
+        app:layout_constraintTop_toTopOf="@id/numberSetText"
+        app:layout_constraintBottom_toBottomOf="@id/numberSetText"/>
+
+    <TextView
+        android:id="@+id/numberSetText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        tools:text="99"/>
+
+    <ImageButton
+        android:id="@+id/decreaseSetButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_remove_circle_outline_24"
+        app:layout_constraintEnd_toStartOf="@id/numberSetText"
+        app:layout_constraintTop_toTopOf="@id/numberSetText"
+        app:layout_constraintBottom_toBottomOf="@id/numberSetText" />
+
+
+    <TextView
+        android:id="@+id/repTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/number_of_reps"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/numberRepText"
+        app:layout_constraintEnd_toEndOf="@id/setTitleText"
+        app:layout_constraintTop_toTopOf="@id/numberRepText" />
+
+    <ImageButton
+        android:id="@+id/increaseRepButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        app:layout_constraintStart_toEndOf="@id/numberRepText"
+        app:layout_constraintTop_toTopOf="@id/numberRepText"
+        app:layout_constraintBottom_toBottomOf="@id/numberRepText"/>
+
+    <TextView
+        android:id="@+id/numberRepText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/numberSetText"
+        app:layout_constraintHorizontal_bias="0.7"
+        tools:text="99"/>
+
+    <ImageButton
+        android:id="@+id/decreaseRepButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_remove_circle_outline_24"
+        app:layout_constraintEnd_toStartOf="@id/numberRepText"
+        app:layout_constraintTop_toTopOf="@id/numberRepText"
+        app:layout_constraintBottom_toBottomOf="@id/numberRepText" />
+
+    <TextView
+        android:id="@+id/timerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00s"
+        android:textSize="72sp"
+        app:layout_constraintTop_toBottomOf="@id/numberRepText"
+        app:layout_constraintBottom_toTopOf="@id/stopButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"/>
+
+    <TextView
+        android:id="@+id/timerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_left_in_set"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timerText" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/stopButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/red"
+        android:text="@string/stop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/startButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
