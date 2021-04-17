@@ -35,6 +35,16 @@ public class WorkoutViewModel extends AndroidViewModel {
         workoutRepository.insert(runWorkout);
     }
 
+    public void insertWeightWorkout(int sets, int reps, int weight){
+        Workout weightWorkout = new Workout(getCurrentUserId(), TYPE_WEIGHT, weight, sets * reps * 4, sets, reps);
+        workoutRepository.insert(weightWorkout);
+    }
+
+    public void insertBodyWorkout(int sets, int reps){
+        Workout weightWorkout = new Workout(getCurrentUserId(), TYPE_BODY, sets * reps * 4, sets, reps);
+        workoutRepository.insert(weightWorkout);
+    }
+
     private String getCurrentUserId(){
         return getApplication().getSharedPreferences("LOGINPREFERENCE", MODE_PRIVATE).getString("currentUser", "");
     }

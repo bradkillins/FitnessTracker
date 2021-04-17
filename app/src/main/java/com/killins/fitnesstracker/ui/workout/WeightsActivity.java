@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.killins.fitnesstracker.R;
 
@@ -20,10 +21,14 @@ public class WeightsActivity extends AppCompatActivity {
     String defaultTextColor;
     TextView timerText;
 
+    WorkoutViewModel workoutViewModel;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weights);
+
+        workoutViewModel = ViewModelProviders.of(this).get(WorkoutViewModel.class);
 
         timerText = findViewById(R.id.timerText);
         Button startButton = findViewById(R.id.startButton);
@@ -74,6 +79,8 @@ public class WeightsActivity extends AppCompatActivity {
     private void stopWorkout(){
         //**** INSERT DATA TO DB ****//
         int weight = Integer.parseInt(((EditText)findViewById(R.id.weightEditText)).getText().toString());
+
+        workoutViewModel.insertWeightWorkout(sets, reps, weight);
 
         handler.removeCallbacks(setTimer);
         handler.removeCallbacks(blinkTimerText);

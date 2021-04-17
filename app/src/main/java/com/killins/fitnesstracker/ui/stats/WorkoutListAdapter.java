@@ -33,10 +33,10 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 View itemView = mInflater.inflate(R.layout.run_workout_item, parent, false);
                 return new WorkoutRunViewHolder(itemView);
             case 1:
-                View itemView1 = mInflater.inflate(R.layout.run_workout_item, parent, false);
+                View itemView1 = mInflater.inflate(R.layout.bodyweight_workout_item, parent, false);
                 return new WorkoutBodyWeightViewHolder(itemView1);
             case 2:
-                View itemView2 = mInflater.inflate(R.layout.run_workout_item, parent, false);
+                View itemView2 = mInflater.inflate(R.layout.weights_workout_item, parent, false);
                 return new WorkoutWeightsViewHolder(itemView2);
             default:
                 return null;
@@ -49,31 +49,33 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         switch(holder.getItemViewType()){
             case 0:
                 WorkoutRunViewHolder workoutRunViewHolder = (WorkoutRunViewHolder)holder;
-                ((WorkoutRunViewHolder) holder).workoutLabel.setText(R.string.title_workout);
-                ((WorkoutRunViewHolder) holder).distanceLabel.setText(R.string.distance_label);
-                ((WorkoutRunViewHolder) holder).runDistance.setText(String.valueOf(currentWorkout.getDistance()));
-                ((WorkoutRunViewHolder) holder).runTimeLabel.setText(R.string.runtime_label);
-                ((WorkoutRunViewHolder) holder).runTime.setText(String.valueOf((int) currentWorkout.getDuration()));
+                workoutRunViewHolder.workoutLabel.setText(R.string.title_workout);
+                workoutRunViewHolder.distanceLabel.setText(R.string.distance_label);
+                workoutRunViewHolder.runDistance.setText(String.valueOf(currentWorkout.getDistance()));
+                workoutRunViewHolder.runTimeLabel.setText(R.string.runtime_label);
+                int time = (int)currentWorkout.getDuration() / 1000;
+                int min = time/60;
+                int sec = time % 60;
+                workoutRunViewHolder.runTime.setText(String.format("%1$02d : %2$02d", min, sec));
                 break;
             case 1:
                 WorkoutBodyWeightViewHolder workoutBodyWeightViewHolder = (WorkoutBodyWeightViewHolder)holder;
-                ((WorkoutBodyWeightViewHolder) holder).workoutLabel.setText(R.string.bodyweight_workout_title);
-                ((WorkoutBodyWeightViewHolder) holder).bodyweightRepsLabel.setText(R.string.bodyweight_reps);
-                ((WorkoutBodyWeightViewHolder) holder).workoutTime.setText(String.valueOf((int) currentWorkout.getDuration()));
-                ((WorkoutBodyWeightViewHolder) holder).bodyweightSets.setText(R.string.weights_sets);
-                ((WorkoutBodyWeightViewHolder) holder).bodyweight_num_sets.setText(String.valueOf(currentWorkout.getSets()));
-                ((WorkoutBodyWeightViewHolder) holder).bodyweight_num_reps.setText(String.valueOf(currentWorkout.getSets()));
-                ((WorkoutBodyWeightViewHolder) holder).bodyweightTimeLabel.setText(R.string.bodyweight_time_label);
+                workoutBodyWeightViewHolder.workoutLabel.setText(R.string.bodyweight_workout_title);
+                workoutBodyWeightViewHolder.bodyweightRepsLabel.setText(R.string.bodyweight_reps);
+                workoutBodyWeightViewHolder.workoutTime.setText(String.valueOf((int) currentWorkout.getDuration()));
+                workoutBodyWeightViewHolder.bodyweightSets.setText(R.string.weights_sets);
+                workoutBodyWeightViewHolder.bodyweight_num_sets.setText(String.valueOf(currentWorkout.getSets()));
+                workoutBodyWeightViewHolder.bodyweight_num_reps.setText(String.valueOf(currentWorkout.getSets()));
+                workoutBodyWeightViewHolder.bodyweightTimeLabel.setText(R.string.bodyweight_time_label);
                 break;
             case 2:
                 WorkoutWeightsViewHolder workoutWeightsViewHolder = (WorkoutWeightsViewHolder)holder;
-                ((WorkoutWeightsViewHolder) holder).workoutLabel.setText(R.string.weights_workout_title);
-                ((WorkoutWeightsViewHolder) holder).weightsReps.setText(R.string.weights_reps);
-                ((WorkoutWeightsViewHolder) holder).workoutTime.setText(String.valueOf((int) currentWorkout.getDuration()));
-                ((WorkoutWeightsViewHolder) holder).weightsSets.setText(R.string.weights_sets);
-                ((WorkoutWeightsViewHolder) holder).num_sets.setText(String.valueOf(currentWorkout.getSets()));
-                ((WorkoutWeightsViewHolder) holder).num_reps.setText(String.valueOf(currentWorkout.getSets()));
-                ((WorkoutWeightsViewHolder) holder).bodyweightTimeLabel.setText(R.string.bodyweight_time_label);
+                workoutWeightsViewHolder.workoutLabel.setText(R.string.weights_workout_title);
+                workoutWeightsViewHolder.weightsReps.setText(R.string.weights_reps);
+                workoutWeightsViewHolder.workoutTime.setText(String.valueOf((int) currentWorkout.getDuration()));
+                workoutWeightsViewHolder.weightsSets.setText(R.string.weights_sets);
+                workoutWeightsViewHolder.num_sets.setText(String.valueOf(currentWorkout.getSets()));
+                workoutWeightsViewHolder.num_reps.setText(String.valueOf(currentWorkout.getSets()));
                 break;
         }
     }
@@ -81,12 +83,11 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        //Log.d(TAG, "getItemViewType: " + (workouts.get(position).workoutType == "runWorkout"));
         if (workouts.get(position).workoutType.equals("runWorkout") ){
             return 0;
-        } else if (workouts.get(position).workoutType.equals("weightsWorkout")){
+        } else if (workouts.get(position).workoutType.equals("body_weightWorkout")){
             return 1;
-        }else if (workouts.get(position).workoutType.equals("body_weightWorkout") ){
+        }else if (workouts.get(position).workoutType.equals("weightsWorkout") ){
             return 2;
         };
         return -1;
@@ -137,13 +138,7 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             runDistance = itemView.findViewById(R.id.run_distance);
             runTimeLabel = itemView.findViewById(R.id.textViewRun);
             runTime = itemView.findViewById(R.id.textViewRunTime);
-            //Use on click listener to set up updating functionality
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    clickListener.onItemClick(view, getAdapterPosition());
-//                }
-//            });
+
         }
     }
     class WorkoutBodyWeightViewHolder extends RecyclerView.ViewHolder {
@@ -169,7 +164,6 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     class WorkoutWeightsViewHolder extends RecyclerView.ViewHolder {
         private final TextView workoutLabel;
         private final TextView workoutTime;
-        private final TextView bodyweightTimeLabel;
         private final TextView weightsSets;
         private final TextView num_sets;
         private final TextView weightsReps;
@@ -183,8 +177,6 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             weightsSets = itemView.findViewById(R.id.weights_sets);
             num_sets = itemView.findViewById(R.id.num_sets);
             num_reps = itemView.findViewById(R.id.num_reps);
-            bodyweightTimeLabel = itemView.findViewById(R.id.bodyWeight_time_label);
-
         }
     }
 

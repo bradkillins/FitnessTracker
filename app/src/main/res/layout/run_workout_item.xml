@@ -17,7 +17,7 @@
             android:id="@+id/runWorkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/run_workout_title"
             android:textSize="24sp"
